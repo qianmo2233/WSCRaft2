@@ -1,0 +1,4 @@
+#WebSocket服务监听端口（重启生效）
+PORT: 8888
+#自动检查更新
+UPDATE_CHECK: false
