@@ -1,9 +1,9 @@
   name: WSCraft
   main: cc.qianmo.wscraft.Main
-  version: 2.0.0
+  version: 2.1.1
   author: qianmo
   database: true
   commands:
     wscraft:
       description: WSCraft主命令
-      usage: /wscraft toekn [view/create]
+      usage: /wscraft token [view/create]

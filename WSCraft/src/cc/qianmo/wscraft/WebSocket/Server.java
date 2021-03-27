@@ -17,6 +17,7 @@ import org.java_websocket.framing.CloseFrame;
 import org.java_websocket.handshake.ClientHandshake;
 import org.java_websocket.handshake.ServerHandshakeBuilder;
 import org.java_websocket.server.WebSocketServer;
+import org.spigotmc.AsyncCatcher;
 
 import java.net.InetSocketAddress;
 
@@ -44,7 +45,11 @@ public class Server extends WebSocketServer {
             Auth.Login(Token, conn);
             Main.getInstance().getLogger().info("用户：" + Auth.getPlayerName(conn) + "登录成功");
             LoginEvent event = new LoginEvent(conn, Auth.getPlayerName(conn));
+            if (AsyncCatcher.enabled) {
+                AsyncCatcher.enabled = false;
+            }
             Bukkit.getPluginManager().callEvent(event);
+            AsyncCatcher.enabled = true;
         }
     }
 
@@ -64,7 +69,11 @@ public class Server extends WebSocketServer {
             Auth.Logout(conn);
         }
         DisConnEvent event = new DisConnEvent(conn);
+        if (AsyncCatcher.enabled) {
+            AsyncCatcher.enabled = false;
+        }
         Bukkit.getPluginManager().callEvent(event);
+        AsyncCatcher.enabled = true;
     }
 
 
@@ -76,7 +85,11 @@ public class Server extends WebSocketServer {
     public void onMessage(WebSocket conn, String message) {
         if(Json.isJson(message)) {
             MsgEvent event = new MsgEvent(conn, message);
+            if (AsyncCatcher.enabled) {
+                AsyncCatcher.enabled = false;
+            }
             Bukkit.getPluginManager().callEvent(event);
+            AsyncCatcher.enabled = true;
         } else {
             Main.getInstance().getLogger().warning("数据错误,请使用Json字符串格式传输数据");
             Main.getInstance().getLogger().warning("拦截的数据:" + message);
@@ -96,7 +109,7 @@ public class Server extends WebSocketServer {
 
     @Override
     public void onStart() {
-        Main.getInstance().getLogger().info("正在启动WebSocket服务");
+        Main.getInstance().getLogger().info("WebSocket服务启动完毕");
         Main.getInstance().getLogger().info("监听端口:" + getPort());
     }
 
