@@ -14,7 +14,7 @@ import java.util.Objects;
 
 //作者：千沫qianmo
 //这是WSCraft的主类
-//Version:2.1.1
+//Version:2.1.2
 
 
 public class Main extends JavaPlugin {
@@ -28,7 +28,7 @@ public class Main extends JavaPlugin {
     public void onLoad() {
         startTime = System.currentTimeMillis();
         getLogger().info("WSCraft正在启动...");
-        getLogger().info("版本:2.1.1");
+        getLogger().info("版本:2.1.2");
         main = this;
         saveDefaultConfig();
         Service(true);
@@ -82,7 +82,7 @@ public class Main extends JavaPlugin {
         getLogger().info("正在检查更新");
         String result = Http.sendGet("http://update.mckits.fun", "plugin=WSCraft&version=2.1.0");
         if (result.equalsIgnoreCase("true")) {
-            this.getLogger().info("该插件版本为2.1.1,已经是最新版本！");
+            this.getLogger().info("该插件版本为2.1.2,已经是最新版本！");
         } else {
             this.getLogger().info("检测到更新版本，请到 https://github.com/qianmo2233/WSCraft2/releases 下载");
         }

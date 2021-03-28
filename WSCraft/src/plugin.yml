@@ -1,6 +1,6 @@
   name: WSCraft
   main: cc.qianmo.wscraft.Main
-  version: 2.1.1
+  version: 2.1.2
   author: qianmo
   database: true
   commands:

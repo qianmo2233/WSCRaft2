@@ -40,7 +40,11 @@ public class Server extends WebSocketServer {
         if (Token.equals("public")) {
             Main.getInstance().getLogger().info("ID:" + ID);
             ConnEvent event = new ConnEvent(conn);
+            if (AsyncCatcher.enabled) {
+                AsyncCatcher.enabled = false;
+            }
             Bukkit.getPluginManager().callEvent(event);
+            AsyncCatcher.enabled = true;
         } else {
             Auth.Login(Token, conn);
             Main.getInstance().getLogger().info("用户：" + Auth.getPlayerName(conn) + "登录成功");
